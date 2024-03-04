@@ -63,66 +63,79 @@ window.addEventListener("resize", ()=>{
 
 const next = () => {
     // to find out which photo we are talking about
-    countPrev = countNext;
+    
+    var sec_three = document.querySelector('.sec_three');
 
-    carousel.style.justifyContent = `flex-start`;
-    let removedElement = images[countNext];
-    images[countNext].style.width = `${0}px`;
-    
-    images[countNext].style.marginLeft = `${0}px`;
-    images[countNext].style.marginRight = `${0}px`;
-    
-    // wait 0.3 seconds for the first resized image to finish resizing
-    setTimeout(()=>{
-        carousel.appendChild(removedElement);
-        if(widowSize <= 650){
-            images[countNext].style.width = `${270}px`;
-            images[countNext].style.marginLeft = `${7.5}px`;
-            images[countNext].style.marginRight = `${7.5}px`;
-        }else{
-            images[countNext].style.width = `${540}px`;
-            images[countNext].style.marginLeft = `${15}px`;
-            images[countNext].style.marginRight = `${15}px`;
-        }
-        
-        if(countNext == 4){
-            countNext = 0;
-        }else{
-            countNext++;
-        }
-    },300)
+    if(!sec_three.classList.contains('scrolling')){
+        sec_three.classList.add('scrolling');
+        countPrev = countNext;
+        carousel.style.justifyContent = `flex-start`;
+        let removedElement = images[countNext];
+        images[countNext].style.width = `${0}px`;
+
+        images[countNext].style.marginLeft = `${0}px`;
+        images[countNext].style.marginRight = `${0}px`;
+
+        // wait 0.3 seconds for the first resized image to finish resizing
+        setTimeout(()=>{
+            carousel.appendChild(removedElement);
+            if(widowSize <= 650){
+                images[countNext].style.width = `${270}px`;
+                images[countNext].style.marginLeft = `${7.5}px`;
+                images[countNext].style.marginRight = `${7.5}px`;
+            }else{
+                images[countNext].style.width = `${540}px`;
+                images[countNext].style.marginLeft = `${15}px`;
+                images[countNext].style.marginRight = `${15}px`;
+            }
+
+            if(countNext == 4){
+                countNext = 0;
+            }else{
+                countNext++;
+            }
+            sec_three.classList.remove('scrolling');
+        },300);
+    }
     
 }
 
 
 const prev = () => {
     // to find out which photo we are talking about
-    countNext = countPrev;
-
-    carousel.style.justifyContent = `flex-end`;
-    let removedElement = images[countPrev];
-    images[countPrev].style.width = `${0}px`;
     
-    images[countPrev].style.marginLeft = `${0}px`;
-    images[countPrev].style.marginRight = `${0}px`;
+    var sec_three = document.querySelector('.sec_three');
+    if(!sec_three.classList.contains('scrolling')){
+        sec_three.classList.add('scrolling');
+        countNext = countPrev;
 
-    // wait 0.3 seconds for the first resized image to finish resizing
-    setTimeout(()=>{
-        carousel.insertBefore(removedElement, carousel.children[0]);
-        if(widowSize <= 650){
-            images[countPrev].style.width = `${270}px`;
-            images[countPrev].style.marginLeft = `${7.5}px`;
-            images[countPrev].style.marginRight = `${7.5}px`;
-        }else{
-            images[countPrev].style.width = `${540}px`;
-            images[countPrev].style.marginLeft = `${15}px`;
-            images[countPrev].style.marginRight = `${15}px`;
-        }
-        
-        if(countPrev == 0){
-            countPrev = 4;
-        }else{
-            countPrev--;
-        }
-    },300)
+        carousel.style.justifyContent = `flex-end`;
+        let removedElement = images[countPrev];
+        images[countPrev].style.width = `${0}px`;
+
+        images[countPrev].style.marginLeft = `${0}px`;
+        images[countPrev].style.marginRight = `${0}px`;
+
+        // wait 0.3 seconds for the first resized image to finish resizing
+        setTimeout(()=>{
+            carousel.insertBefore(removedElement, carousel.children[0]);
+            if(widowSize <= 650){
+                images[countPrev].style.width = `${270}px`;
+                images[countPrev].style.marginLeft = `${7.5}px`;
+                images[countPrev].style.marginRight = `${7.5}px`;
+            }else{
+                images[countPrev].style.width = `${540}px`;
+                images[countPrev].style.marginLeft = `${15}px`;
+                images[countPrev].style.marginRight = `${15}px`;
+            }
+
+            if(countPrev == 0){
+                countPrev = 4;
+            }else{
+                countPrev--;
+            }
+            sec_three.classList.remove('scrolling');
+        },300)
+    }
+
 }
